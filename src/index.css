@@ -1,1 +1,101 @@
+/* Import Tailwind CSS */
 @import "tailwindcss";
+
+/* Global styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gray-400);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gray-500);
+}
+
+/* Override PrimeReact button colors with our teal theme */
+.p-button {
+  background-color: #14b8a6 !important;
+  border-color: #14b8a6 !important;
+  color: white !important;
+}
+
+.p-button:hover {
+  background-color: #0d9488 !important;
+  border-color: #0d9488 !important;
+}
+
+.p-button:active {
+  background-color: #0f766e !important;
+  border-color: #0f766e !important;
+}
+
+.p-button.p-button-success {
+  background-color: #22c55e !important;
+  border-color: #22c55e !important;
+}
+
+.p-button.p-button-success:hover {
+  background-color: #16a34a !important;
+  border-color: #16a34a !important;
+}
+
+.p-button.p-button-warning {
+  background-color: #f59e0b !important;
+  border-color: #f59e0b !important;
+}
+
+.p-button.p-button-warning:hover {
+  background-color: #d97706 !important;
+  border-color: #d97706 !important;
+}
+
+.p-button.p-button-danger {
+  background-color: #ef4444 !important;
+  border-color: #ef4444 !important;
+}
+
+.p-button.p-button-danger:hover {
+  background-color: #dc2626 !important;
+  border-color: #dc2626 !important;
+}
+
+.p-button.p-button-info,
+.p-button.p-button-secondary {
+  background-color: #10b981 !important;
+  border-color: #10b981 !important;
+}
+
+.p-button.p-button-info:hover,
+.p-button.p-button-secondary:hover {
+  background-color: #059669 !important;
+  border-color: #059669 !important;
+}
