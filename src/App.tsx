@@ -1,18 +1,30 @@
-import { Button } from 'primereact/button';
+/**
+ * Main Application Component
+ *
+ * This is the root component of our DreamSoft Sales & Inventory Management App.
+ * It wires together:
+ * - QueryProvider (React Query for server state)
+ * - RouterProvider (React Router for navigation)
+ * - Theme initialization (from Zustand UI store)
+ */
+
+import './index.css';
+import { RouterProvider } from 'react-router-dom';
+import { QueryProvider } from './data/remote/providers/QueryProvider';
+import { router } from './app/router';
+import { initializeTheme } from './data/local/stores/ui.store';
+import { useEffect } from 'react';
 
 function App() {
+  // Initialize theme on app load
+  useEffect(() => {
+    initializeTheme();
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-blue-600 mb-4">
-          DreamSoft Frontend
-        </h1>
-        <p className="text-gray-600 mb-4">
-          Tailwind CSS is working! ✅
-        </p>
-        <Button label="PrimeReact Button" icon="pi pi-check" className="p-button-success" />
-      </div>
-    </div>
+    <QueryProvider>
+      <RouterProvider router={router} />
+    </QueryProvider>
   );
 }
 
