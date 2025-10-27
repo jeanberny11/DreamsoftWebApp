@@ -14,12 +14,20 @@ import { QueryProvider } from './data/remote/providers/QueryProvider';
 import { router } from './app/router';
 import { initializeTheme } from './data/local/stores/ui.store';
 import { useEffect } from 'react';
+import { useAuthStore } from './features/auth/stores/auth.store';
 
 function App() {
+  // Get auth initialization function
+  const initializeAuth = useAuthStore((state) => state.initializeAuth);
+
   // Initialize theme on app load
   useEffect(() => {
     initializeTheme();
-  }, []);
+    // Initialize auth state from localStorage
+    // This restores the user's session if they were logged in
+    initializeAuth();
+    console.log('🎨 Application initialized');
+  }, [initializeAuth]);
 
   return (
     <QueryProvider>

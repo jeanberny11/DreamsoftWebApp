@@ -1,51 +1,7 @@
-/**
- * Router Configuration
- *
- * Defines all routes in the application.
- * Uses React Router v6 with route guards for authentication.
- *
- * Structure:
- * - Root (/) → Redirects to /dashboard
- * - Public routes (login, register) → Only accessible when NOT logged in
- * - Protected routes (dashboard, sales, etc.) → Only accessible when logged in
- * - 404 for unknown routes
- */
-
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { ProtectedRoute } from './ProtectedRoute';
 import { PublicRoute } from './PublicRoute';
-
-// ========================================
-// TEMPORARY PLACEHOLDER PAGES
-// These will be replaced with real pages later
-// ========================================
-
-/**
- * Temporary Login Page
- * Includes a demo login button for testing
- */
-const TempLoginPage = () => (
-  <div className="min-h-screen flex items-center justify-center bg-gray-100">
-    <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-      <h1 className="text-2xl font-bold text-gray-800 mb-4">Login Page</h1>
-      <p className="text-gray-600 mb-4">This is a temporary login page placeholder.</p>
-      <p className="text-gray-500 text-sm mb-6">
-        Click the button below to simulate login and access protected routes.
-      </p>
-
-      {/* Demo login button - sets token and redirects */}
-      <button
-        onClick={() => {
-          localStorage.setItem('authToken', 'demo-token-123');
-          window.location.href = '/dashboard';
-        }}
-        className="w-full bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded transition-colors"
-      >
-        Demo Login (Click to login)
-      </button>
-    </div>
-  </div>
-);
+import { LoginPage } from '../../features/auth/components/LoginPage';
 
 /**
  * Temporary Dashboard Page
@@ -192,7 +148,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '/login',
-        element: <TempLoginPage />,
+        element: <LoginPage />,
       },
     ],
   },

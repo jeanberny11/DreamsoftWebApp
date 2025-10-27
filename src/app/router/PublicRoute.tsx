@@ -10,22 +10,16 @@
  * </Route>
  */
 
+import { useIsAuthenticated } from '../../features/auth/stores/auth.store';
 import { Navigate, Outlet } from 'react-router-dom';
-
-/**
- * Check if user is authenticated
- */
-const isAuthenticated = (): boolean => {
-  const token = localStorage.getItem('authToken');
-  return !!token;
-};
 
 /**
  * PublicRoute Component
  */
 export function PublicRoute() {
+  const isAuthenticated = useIsAuthenticated();
   // Check if user is already authenticated
-  if (isAuthenticated()) {
+  if (isAuthenticated) {
     // User is logged in, redirect to dashboard
     console.log('✅ Already authenticated, redirecting to dashboard...');
     return <Navigate to="/dashboard" replace />;

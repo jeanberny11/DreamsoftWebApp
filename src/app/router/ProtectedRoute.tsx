@@ -1,34 +1,12 @@
-/**
- * ProtectedRoute Component
- *
- * Wraps routes that require authentication.
- * If user is not logged in, redirects to login page.
- *
- * Usage:
- * <Route element={<ProtectedRoute />}>
- *   <Route path="/dashboard" element={<DashboardPage />} />
- * </Route>
- */
-
+import { useIsAuthenticated } from '../../features/auth/stores/auth.store';
 import { Navigate, Outlet } from 'react-router-dom';
 
-/**
- * Check if user is authenticated
- *
- * Currently checks for token in localStorage.
- * Later, this will be replaced with a proper auth store.
- */
-const isAuthenticated = (): boolean => {
-  const token = localStorage.getItem('authToken');
-  return !!token; // !! converts to boolean (null/undefined = false, string = true)
-};
-
-/**
- * ProtectedRoute Component
- */
 export function ProtectedRoute() {
+  
+const isAuthenticated = useIsAuthenticated();
+
   // Check if user is authenticated
-  if (!isAuthenticated()) {
+  if (!isAuthenticated) {
     // User is NOT authenticated, redirect to login
     console.log('🔒 Not authenticated, redirecting to login...');
     return <Navigate to="/login" replace />;
