@@ -1,7 +1,20 @@
-/* Import Tailwind CSS */
+/**
+ * Global Styles
+ * Location: src/index.css
+ *
+ * This file contains only global application styles.
+ * PrimeReact theming is now handled in src/styles/primereact-theme.css
+ */
+
+/* ========================================
+   TAILWIND CSS IMPORT
+   ======================================== */
 @import "tailwindcss";
 
-/* Global styles */
+/* ========================================
+   GLOBAL RESET & BASE STYLES
+   ======================================== */
+
 *,
 *::before,
 *::after {
@@ -22,7 +35,10 @@ body {
   min-height: 100vh;
 }
 
-/* Scrollbar styling */
+/* ========================================
+   CUSTOM SCROLLBAR STYLING
+   ======================================== */
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -41,61 +57,77 @@ body {
   background: var(--color-gray-500);
 }
 
-/* Override PrimeReact button colors with our teal theme */
-.p-button {
-  background-color: #14b8a6 !important;
-  border-color: #14b8a6 !important;
-  color: white !important;
+/* ========================================
+   CUSTOM GRADIENT UTILITIES
+   Using CSS Variables
+   ======================================== */
+
+/* Primary Gradients */
+.bg-gradient-primary {
+  background: linear-gradient(to bottom right, var(--color-primary-500), var(--color-primary-700));
 }
 
-.p-button:hover {
-  background-color: #0d9488 !important;
-  border-color: #0d9488 !important;
+.bg-gradient-primary-light {
+  background: linear-gradient(to bottom right, var(--color-primary-400), var(--color-primary-600));
 }
 
-.p-button:active {
-  background-color: #0f766e !important;
-  border-color: #0f766e !important;
+.bg-gradient-primary-dark {
+  background: linear-gradient(to bottom right, var(--color-primary-600), var(--color-primary-900));
 }
 
-.p-button.p-button-success {
-  background-color: #22c55e !important;
-  border-color: #22c55e !important;
+/* Secondary Gradients */
+.bg-gradient-secondary {
+  background: linear-gradient(to bottom right, var(--color-secondary-500), var(--color-secondary-700));
 }
 
-.p-button.p-button-success:hover {
-  background-color: #16a34a !important;
-  border-color: #16a34a !important;
+/* Accent Gradients */
+.bg-gradient-accent {
+  background: linear-gradient(to bottom right, var(--color-accent-500), var(--color-accent-700));
 }
 
-.p-button.p-button-warning {
-  background-color: #f59e0b !important;
-  border-color: #f59e0b !important;
+/* Success Gradient */
+.bg-gradient-success {
+  background: linear-gradient(to bottom right, var(--color-success-500), var(--color-success-700));
 }
 
-.p-button.p-button-warning:hover {
-  background-color: #d97706 !important;
-  border-color: #d97706 !important;
+/* Warning Gradient */
+.bg-gradient-warning {
+  background: linear-gradient(to bottom right, var(--color-warning-500), var(--color-warning-700));
 }
 
-.p-button.p-button-danger {
-  background-color: #ef4444 !important;
-  border-color: #ef4444 !important;
+/* Error Gradient */
+.bg-gradient-error {
+  background: linear-gradient(to bottom right, var(--color-error-500), var(--color-error-700));
 }
 
-.p-button.p-button-danger:hover {
-  background-color: #dc2626 !important;
-  border-color: #dc2626 !important;
+/* ========================================
+   DIRECTIONAL VARIANTS
+   ======================================== */
+
+/* Top to Bottom */
+.bg-gradient-primary-vertical {
+  background: linear-gradient(to bottom, var(--color-primary-500), var(--color-primary-700));
 }
 
-.p-button.p-button-info,
-.p-button.p-button-secondary {
-  background-color: #10b981 !important;
-  border-color: #10b981 !important;
+/* Left to Right */
+.bg-gradient-primary-horizontal {
+  background: linear-gradient(to right, var(--color-primary-500), var(--color-primary-700));
 }
 
-.p-button.p-button-info:hover,
-.p-button.p-button-secondary:hover {
-  background-color: #059669 !important;
-  border-color: #059669 !important;
+/* Diagonal (Top-Left to Bottom-Right) */
+.bg-gradient-primary-diagonal {
+  background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-700));
 }
+
+
+/* ========================================
+   NOTE: PrimeReact Component Theming
+   ======================================== */
+
+/*
+ * All PrimeReact component styling is now handled in:
+ * src/styles/primereact-theme.css
+ *
+ * This ensures no conflicts and maintains a single source of truth
+ * for component theming.
+ */

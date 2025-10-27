@@ -1,0 +1,33 @@
+/* src/styles/index.css */
+/**
+ * Styles Bundle
+ * Location: src/styles/index.css
+ *
+ * This file bundles all our custom styles in the correct order.
+ * Import this single file instead of importing each style file separately.
+ *
+ * Import Order:
+ * 1. CSS Variables (color definitions)
+ * 2. Theme files (light/dark)
+ * 3. PrimeReact theme overrides
+ */
+
+/* ========================================
+   1. CSS VARIABLES
+   Color definitions - Single source of truth
+   ======================================== */
+@import "./variables.css";
+
+/* ========================================
+   2. THEME FILES
+   Light and dark theme configurations
+   ======================================== */
+@import "./themes/light.css";
+@import "./themes/dark.css";
+
+/* ========================================
+   3. PRIMEREACT THEME OVERRIDES
+   Custom theming for PrimeReact components
+   Must come after variables.css to use CSS variables
+   ======================================== */
+@import "./primereact-theme.css";

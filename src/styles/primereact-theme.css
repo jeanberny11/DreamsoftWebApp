@@ -1,0 +1,437 @@
+/**
+ * PrimeReact Custom Theme Overrides
+ * Location: src/styles/primereact-theme.css
+ *
+ * This file customizes PrimeReact components using our CSS variables.
+ * All colors reference variables.css - SINGLE SOURCE OF TRUTH!
+ */
+
+/* ========================================
+   PRIMARY COLOR OVERRIDES
+   Note: Using CSS variables from variables.css
+   ======================================== */
+
+:root {
+  /* PrimeReact-specific variables that reference our color system */
+  --primary-color: var(--color-primary-500);
+  --primary-color-text: #ffffff;
+
+  /* Surface colors */
+  --surface-0: var(--color-bg-primary);
+  --surface-50: var(--color-gray-50);
+  --surface-100: var(--color-gray-100);
+  --surface-200: var(--color-gray-200);
+  --surface-300: var(--color-gray-300);
+  --surface-400: var(--color-gray-400);
+  --surface-500: var(--color-gray-500);
+  --surface-600: var(--color-gray-600);
+  --surface-700: var(--color-gray-700);
+  --surface-800: var(--color-gray-800);
+  --surface-900: var(--color-gray-900);
+
+  /* Text colors */
+  --text-color: var(--color-text-primary);
+  --text-color-secondary: var(--color-text-secondary);
+
+  /* Highlight */
+  --highlight-bg: var(--color-primary-100);
+  --highlight-text-color: var(--color-primary-700);
+
+  /* Border */
+  --surface-border: var(--color-border-medium);
+
+  /* Focus ring - using our primary color with opacity */
+  --focus-ring: 0 0 0 0.2rem rgba(20, 184, 166, 0.2);
+}
+
+/* ========================================
+   BUTTON COMPONENTS
+   Using CSS variables from variables.css
+   ======================================== */
+
+.p-button {
+  background: var(--color-primary-500) !important;
+  border-color: var(--color-primary-500) !important;
+  color: #ffffff !important;
+  transition: all 0.2s;
+}
+
+.p-button:enabled:hover {
+  background: var(--color-primary-600) !important;
+  border-color: var(--color-primary-600) !important;
+}
+
+.p-button:enabled:active {
+  background: var(--color-primary-700) !important;
+  border-color: var(--color-primary-700) !important;
+}
+
+.p-button:focus {
+  box-shadow: 0 0 0 0.2rem rgba(20, 184, 166, 0.5) !important;
+}
+
+/* Button Severities - using semantic color variables */
+.p-button.p-button-success {
+  background: var(--color-success-500) !important;
+  border-color: var(--color-success-500) !important;
+}
+
+.p-button.p-button-success:enabled:hover {
+  background: var(--color-success-600) !important;
+  border-color: var(--color-success-600) !important;
+}
+
+.p-button.p-button-info,
+.p-button.p-button-secondary {
+  background: var(--color-secondary-500) !important;
+  border-color: var(--color-secondary-500) !important;
+}
+
+.p-button.p-button-info:enabled:hover,
+.p-button.p-button-secondary:enabled:hover {
+  background: var(--color-secondary-600) !important;
+  border-color: var(--color-secondary-600) !important;
+}
+
+.p-button.p-button-warning {
+  background: var(--color-warning-500) !important;
+  border-color: var(--color-warning-500) !important;
+}
+
+.p-button.p-button-warning:enabled:hover {
+  background: var(--color-warning-600) !important;
+  border-color: var(--color-warning-600) !important;
+}
+
+.p-button.p-button-danger {
+  background: var(--color-error-500) !important;
+  border-color: var(--color-error-500) !important;
+}
+
+.p-button.p-button-danger:enabled:hover {
+  background: var(--color-error-600) !important;
+  border-color: var(--color-error-600) !important;
+}
+
+/* Outlined Buttons */
+.p-button.p-button-outlined {
+  background: transparent !important;
+  color: var(--color-primary-500) !important;
+  border-color: var(--color-primary-500) !important;
+}
+
+.p-button.p-button-outlined:enabled:hover {
+  background: var(--color-primary-50) !important;
+  color: var(--color-primary-600) !important;
+  border-color: var(--color-primary-600) !important;
+}
+
+/* Text Buttons */
+.p-button.p-button-text {
+  background: transparent !important;
+  color: var(--color-primary-500) !important;
+  border-color: transparent !important;
+}
+
+.p-button.p-button-text:enabled:hover {
+  background: var(--color-primary-50) !important;
+  color: var(--color-primary-600) !important;
+}
+
+/* ========================================
+   INPUT COMPONENTS
+   ======================================== */
+
+/* InputText */
+.p-inputtext {
+  border-color: var(--color-border-medium);
+  transition: all 0.2s;
+}
+
+.p-inputtext:enabled:hover {
+  border-color: var(--color-border-dark);
+}
+
+.p-inputtext:enabled:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem rgba(20, 184, 166, 0.2);
+  border-color: var(--color-primary-500);
+}
+
+/* Invalid state */
+.p-inputtext.p-invalid {
+  border-color: var(--color-error-500);
+}
+
+.p-inputtext.p-invalid:enabled:focus {
+  box-shadow: 0 0 0 0.2rem rgba(239, 68, 68, 0.2);
+  border-color: var(--color-error-500);
+}
+
+/* ========================================
+   PASSWORD COMPONENT
+   ======================================== */
+
+.p-password {
+  width: 100% !important;
+  display: inline-flex;
+}
+
+.p-password .p-icon-field {
+  width: 100%;
+}
+
+.p-password input {
+  width: 100%;
+}
+
+.p-password-panel {
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border-medium);
+}
+
+/* ========================================
+   CHECKBOX COMPONENT
+   ======================================== */
+
+.p-checkbox .p-checkbox-box {
+  border-color: var(--color-border-medium);
+  background: var(--color-bg-primary);
+  transition: all 0.2s;
+}
+
+.p-checkbox .p-checkbox-box:not(.p-disabled):hover {
+  border-color: var(--color-primary-500);
+}
+
+/* Checked state - p-highlight is on parent, not on box */
+.p-checkbox.p-highlight .p-checkbox-box {
+  border-color: var(--color-primary-500) !important;
+  background: var(--color-primary-500) !important;
+}
+
+.p-checkbox.p-highlight .p-checkbox-icon {
+  color: #ffffff !important;
+}
+
+.p-checkbox.p-highlight:not(.p-checkbox-disabled):hover .p-checkbox-box {
+  border-color: var(--color-primary-600);
+  background: var(--color-primary-600);
+}
+
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem rgba(20, 184, 166, 0.2);
+  border-color: var(--color-primary-500);
+}
+
+/* ========================================
+   TOAST COMPONENT
+   ======================================== */
+
+.p-toast .p-toast-message.p-toast-message-info {
+  background: var(--color-info-50);
+  border: solid var(--color-info-300);
+  border-width: 0 0 0 6px;
+  color: var(--color-info-800);
+}
+
+.p-toast .p-toast-message.p-toast-message-success {
+  background: var(--color-success-50);
+  border: solid var(--color-success-300);
+  border-width: 0 0 0 6px;
+  color: var(--color-success-800);
+}
+
+.p-toast .p-toast-message.p-toast-message-warn {
+  background: var(--color-warning-50);
+  border: solid var(--color-warning-300);
+  border-width: 0 0 0 6px;
+  color: var(--color-warning-800);
+}
+
+.p-toast .p-toast-message.p-toast-message-error {
+  background: var(--color-error-50);
+  border: solid var(--color-error-300);
+  border-width: 0 0 0 6px;
+  color: var(--color-error-800);
+}
+
+/* ========================================
+   DIVIDER COMPONENT
+   ======================================== */
+
+.p-divider .p-divider-content {
+  background-color: var(--color-bg-primary);
+}
+
+.p-divider.p-divider-horizontal {
+  margin: 1rem 0;
+  padding: 0 1rem;
+}
+
+.p-divider.p-divider-horizontal:before {
+  border-top: 1px solid var(--color-border-light);
+}
+
+/* ========================================
+   MESSAGE COMPONENT
+   ======================================== */
+
+.p-message {
+  margin: 0;
+  border-radius: 6px;
+}
+
+.p-message.p-message-info {
+  background: var(--color-info-50);
+  border: solid var(--color-info-300);
+  border-width: 0 0 0 6px;
+  color: var(--color-info-800);
+}
+
+.p-message.p-message-info .p-message-icon {
+  color: var(--color-info-800);
+}
+
+.p-message.p-message-success {
+  background: var(--color-success-50);
+  border: solid var(--color-success-300);
+  border-width: 0 0 0 6px;
+  color: var(--color-success-800);
+}
+
+.p-message.p-message-success .p-message-icon {
+  color: var(--color-success-800);
+}
+
+.p-message.p-message-warn {
+  background: var(--color-warning-50);
+  border: solid var(--color-warning-300);
+  border-width: 0 0 0 6px;
+  color: var(--color-warning-800);
+}
+
+.p-message.p-message-warn .p-message-icon {
+  color: var(--color-warning-800);
+}
+
+.p-message.p-message-error {
+  background: var(--color-error-50);
+  border: solid var(--color-error-300);
+  border-width: 0 0 0 6px;
+  color: var(--color-error-800);
+}
+
+.p-message.p-message-error .p-message-icon {
+  color: var(--color-error-800);
+}
+
+/* ========================================
+   DIALOG/MODAL COMPONENT
+   ======================================== */
+
+.p-dialog .p-dialog-header {
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.p-dialog .p-dialog-content {
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+}
+
+.p-dialog .p-dialog-footer {
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  border-top: 1px solid var(--color-border-light);
+}
+
+/* ========================================
+   DROPDOWN COMPONENT
+   ======================================== */
+
+.p-dropdown {
+  border-color: var(--color-border-medium);
+}
+
+.p-dropdown:not(.p-disabled):hover {
+  border-color: var(--color-border-dark);
+}
+
+.p-dropdown:not(.p-disabled).p-focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem rgba(20, 184, 166, 0.2);
+  border-color: var(--color-primary-500);
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  color: var(--color-primary-700);
+  background: var(--color-primary-100);
+}
+
+/* ========================================
+   DATA TABLE COMPONENT
+   ======================================== */
+
+.p-datatable .p-datatable-thead > tr > th {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  border-color: var(--color-border-light);
+}
+
+.p-datatable .p-datatable-tbody > tr {
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+}
+
+.p-datatable .p-datatable-tbody > tr:nth-child(even) {
+  background: var(--color-bg-secondary);
+}
+
+.p-datatable .p-datatable-tbody > tr > td {
+  border-color: var(--color-border-light);
+}
+
+.p-datatable .p-datatable-tbody > tr.p-highlight {
+  background: var(--color-primary-100);
+  color: var(--color-primary-700);
+}
+
+/* ========================================
+   PAGINATOR COMPONENT
+   ======================================== */
+
+.p-paginator {
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  border-color: var(--color-border-light);
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  background: var(--color-primary-500);
+  border-color: var(--color-primary-500);
+  color: #ffffff;
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+/* Focus ring */
+.p-focus {
+  box-shadow: 0 0 0 0.2rem rgba(20, 184, 166, 0.2) !important;
+}
+
+/* Invalid state */
+.p-invalid {
+  border-color: var(--color-error-500) !important;
+}
+
+.p-invalid:enabled:focus {
+  box-shadow: 0 0 0 0.2rem rgba(239, 68, 68, 0.2) !important;
+}
