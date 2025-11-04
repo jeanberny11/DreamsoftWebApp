@@ -12,6 +12,17 @@ export const ErrorResponseSchema = z.object({
 
 export type ErrorResponse = z.infer<typeof ErrorResponseSchema>;
 
+// ASP.NET Core Validation Error Schema
+export const ValidationErrorResponseSchema = z.object({
+  type: z.string().optional(),
+  title: z.string(),
+  status: z.number(),
+  errors: z.record(z.string(), z.array(z.string())), // { "FieldName": ["Error message 1", "Error message 2"] }
+  traceId: z.string().optional(),
+});
+
+export type ValidationErrorResponse = z.infer<typeof ValidationErrorResponseSchema>;
+
 // ========================================
 // SECTION 1: Configuration from .env
 // ========================================
@@ -112,6 +123,26 @@ apiClient.interceptors.response.use(
       _retry?: boolean;
     };
 
+    // Check if it's an ASP.NET Core validation error (400 with errors object)
+    const isValidationError =
+      error.response?.status === 400 &&
+      ValidationErrorResponseSchema.safeParse(error.response.data).success;
+
+    // If validation error, return it as-is for proper handling in components
+    if (isValidationError) {
+      const validationError = error.response!.data as ValidationErrorResponse;
+
+      if (import.meta.env.VITE_ENV === "development") {
+        console.error("❌ Validation Error:", {
+          validationError,
+          url: error.config?.url,
+        });
+      }
+
+      return Promise.reject(validationError);
+    }
+
+    // Handle custom error response format
     const errorResponse: ErrorResponse =
       error.response &&
       error.response.data &&
