@@ -1,0 +1,66 @@
+{
+  "errors": {
+    "required": "Este campo es requerido",
+    "email": {
+      "invalid": "Por favor ingrese un correo electrónico válido",
+      "required": "El correo electrónico es requerido"
+    },
+    "password": {
+      "required": "La contraseña es requerida",
+      "minLength": "La contraseña debe tener al menos {{min}} caracteres",
+      "maxLength": "La contraseña debe tener como máximo {{max}} caracteres",
+      "uppercase": "La contraseña debe contener al menos una letra mayúscula",
+      "lowercase": "La contraseña debe contener al menos una letra minúscula",
+      "number": "La contraseña debe contener al menos un número",
+      "special": "La contraseña debe contener al menos un carácter especial",
+      "mismatch": "Las contraseñas no coinciden"
+    },
+    "username": {
+      "required": "El nombre de usuario es requerido",
+      "minLength": "El nombre de usuario debe tener al menos {{min}} caracteres",
+      "maxLength": "El nombre de usuario debe tener como máximo {{max}} caracteres",
+      "invalid": "El nombre de usuario solo puede contener letras, números y guiones bajos"
+    },
+    "name": {
+      "required": "El nombre es requerido",
+      "minLength": "El nombre debe tener al menos {{min}} caracteres",
+      "maxLength": "El nombre debe tener como máximo {{max}} caracteres",
+      "invalid": "El nombre solo puede contener letras, espacios y guiones"
+    },
+    "phone": {
+      "required": "El número de teléfono es requerido",
+      "invalid": "Por favor ingrese un número de teléfono válido",
+      "invalidFormat": "El formato del numero de telefono es invalido. Debe incluir el codigo de area (e.g., +1 809 123 4567)",
+      "placeholder": "Digite el número de teléfono"
+    },
+    "address": {
+      "required": "La dirección es requerida",
+      "street": "La dirección es requerida",
+      "city": "La ciudad es requerida",
+      "state": "El estado/provincia es requerido",
+      "postalCode": "El código postal es requerido",
+      "country": "El país es requerido"
+    },
+    "date": {
+      "required": "La fecha es requerida",
+      "invalid": "Por favor ingrese una fecha válida",
+      "future": "La fecha no puede estar en el futuro",
+      "past": "La fecha no puede estar en el pasado",
+      "minAge": "Debe tener al menos {{age}} años"
+    },
+    "terms": {
+      "required": "Debe aceptar los términos y condiciones"
+    },
+    "verification": {
+      "required": "Por favor verifique su correo electrónico antes de continuar",
+      "invalid": "El código de verificación debe tener 6 dígitos",
+      "expired": "El código de verificación ha expirado"
+    }
+  },
+  "passwordStrength": {
+    "weak": "Débil",
+    "fair": "Regular",
+    "good": "Buena",
+    "strong": "Fuerte"
+  }
+}

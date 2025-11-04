@@ -84,7 +84,7 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({
           RIGHT SIDE - FORM CONTENT
           ======================================== */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-gray-50">
-        <div className="w-full max-w-md">
+        <div className="w-full max-w-md lg:max-w-xl">
           {/* Mobile Logo (only visible on small screens) */}
           <div className="lg:hidden mb-8 text-center">
             <div className="inline-flex items-center space-x-3">
@@ -102,15 +102,15 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({
           </div>
 
           {/* Form Content (Login, Register, Forgot Password) */}
-          <div className="bg-white rounded-2xl shadow-lg p-8">
+          <div className="bg-white rounded-2xl shadow-lg p-5">
             {children}
           </div>
 
           {/* Footer Links (optional) */}
           <div className="mt-6 text-center text-sm text-gray-600">
-            Need help?{' '}
+            Necesita ayuda?{' '}
             <a href="#" className="text-primary-600 hover:text-primary-700 font-medium">
-              Contact Support
+              Contacte soporte
             </a>
           </div>
         </div>

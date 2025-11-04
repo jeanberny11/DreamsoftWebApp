@@ -8,8 +8,9 @@ import { Checkbox } from 'primereact/checkbox';
 import { Button } from 'primereact/button';
 import { Divider } from 'primereact/divider';
 import { Toast } from 'primereact/toast';
+import { useTranslation } from 'react-i18next';
 import { AuthLayout } from './AuthLayout';
-import { loginSchema, type LoginFormData } from '../utils/validation.schemas';
+import { createLoginSchema, type LoginFormData } from '../utils/validation.schemas';
 import { useAuthStore } from '../stores/auth.store';
 
 // ========================================
@@ -19,6 +20,8 @@ import { useAuthStore } from '../stores/auth.store';
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const toastRef = useRef<Toast>(null);
+  const { t } = useTranslation(['auth', 'common']);
+
   // Get auth store state and actions
   const { login, isLoading, clearError } = useAuthStore();
 
@@ -29,7 +32,7 @@ export const LoginPage: React.FC = () => {
     watch,
     setValue,
   } = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(createLoginSchema(t)),
     defaultValues: {
       email: '',
       userName: '',
@@ -56,8 +59,8 @@ export const LoginPage: React.FC = () => {
       // Show success message
       toastRef.current?.show({
         severity: 'success',
-        summary: 'Login Successful',
-        detail: 'Welcome back!',
+        summary: t('auth:login.success'),
+        detail: t('app.welcome', { ns: 'common' }),
         life: 3000,
       });
 
@@ -68,8 +71,8 @@ export const LoginPage: React.FC = () => {
     } catch (error: any) {
       toastRef.current?.show({
         severity: 'error',
-        summary: 'Login Failed',
-        detail: error.message || 'Invalid email or password',
+        summary: t('common:messages.error'),
+        detail: error.message || t('auth:login.error'),
         life: 5000,
       });
     }
@@ -100,7 +103,7 @@ export const LoginPage: React.FC = () => {
   // RENDER
   // ========================================
   return (
-    <AuthLayout title="Bienvenido" subtitle="Inicia session en tu cuenta para continuar">
+    <AuthLayout title={t('auth:login.title')} subtitle={t('auth:login.subtitle')}>
       <Toast ref={toastRef} />
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -109,12 +112,12 @@ export const LoginPage: React.FC = () => {
             ======================================== */}
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-            Correo Electronico
+            {t('auth:login.email')}
           </label>
           <InputText
             id="email"
             type="email"
-            placeholder="Digita tu correo electronico"
+            placeholder={t('auth:login.email')}
             className={`w-full ${errors.email ? 'p-invalid' : ''}`}
             {...register('email')}
             disabled={isLoading}
@@ -129,12 +132,12 @@ export const LoginPage: React.FC = () => {
             ======================================== */}
         <div>
           <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">
-            Nombre de Usuario
+            {t('auth:login.username')}
           </label>
           <InputText
             id="username"
             type="text"
-            placeholder="Digita tu nombre de usuario"
+            placeholder={t('auth:login.username')}
             className={`w-full ${errors.userName ? 'p-invalid' : ''}`}
             {...register('userName')}
             disabled={isLoading}
@@ -149,11 +152,11 @@ export const LoginPage: React.FC = () => {
             ======================================== */}
         <div>
           <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-            Contrasena
+            {t('auth:login.password')}
           </label>
           <Password
             id="password"
-            placeholder="Digita tu contrasena"
+            placeholder={t('auth:login.password')}
             toggleMask
             feedback={false}
             className={`w-full ${errors.password ? 'p-invalid' : ''}`}
@@ -180,7 +183,7 @@ export const LoginPage: React.FC = () => {
               disabled={isLoading}
             />
             <label htmlFor="rememberMe" className="ml-2 text-sm text-gray-700 cursor-pointer">
-              Recordar Usuario
+              {t('auth:login.rememberMe')}
             </label>
           </div>
 
@@ -189,7 +192,7 @@ export const LoginPage: React.FC = () => {
             to="/forgot-password"
             className="text-sm text-primary-600 hover:text-primary-700 font-medium"
           >
-            Olvidate tu contrasena?
+            {t('auth:login.forgotPassword')}
           </Link>
         </div>
 
@@ -198,7 +201,7 @@ export const LoginPage: React.FC = () => {
             ======================================== */}
         <Button
           type="submit"
-          label={isLoading ? 'Iniciando Session...' : 'Iniciar Session'}
+          label={isLoading ? t('auth:login.submitting') : t('auth:login.submit')}
           icon={isLoading ? 'pi pi-spin pi-spinner' : 'pi pi-sign-in'}
           className="w-full"
           loading={isLoading}
@@ -209,7 +212,7 @@ export const LoginPage: React.FC = () => {
             DIVIDER
             ======================================== */}
         <Divider align="center">
-          <span className="text-gray-500 text-sm">O Iniciar Session Con</span>
+          <span className="text-gray-500 text-sm">{t('auth:login.orSignInWith')}</span>
         </Divider>
 
         {/* ========================================
@@ -242,12 +245,12 @@ export const LoginPage: React.FC = () => {
             ======================================== */}
         <div className="text-center mt-6">
           <p className="text-sm text-gray-600">
-            Don't have an account?{' '}
+            {t('auth:login.noAccount')}{' '}
             <Link
               to="/register"
               className="text-primary-600 hover:text-primary-700 font-medium"
             >
-              Create Account
+              {t('auth:login.signUp')}
             </Link>
           </p>
         </div>

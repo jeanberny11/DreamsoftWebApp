@@ -12,6 +12,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
+import './shared/i18n/config'; // Initialize i18n
 
 // ========================================
 // 1. PRIMEREACT BASE THEME

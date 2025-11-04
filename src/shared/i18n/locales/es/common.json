@@ -1,0 +1,41 @@
+{
+  "app": {
+    "name": "Dreamsoft",
+    "welcome": "Bienvenido a Dreamsoft"
+  },
+  "actions": {
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "finish": "Finalizar",
+    "close": "Cerrar",
+    "confirm": "Confirmar",
+    "review": "Revisar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "clear": "Limpiar",
+    "reset": "Restablecer",
+    "apply": "Aplicar"
+  },
+  "messages": {
+    "loading": "Cargando...",
+    "saving": "Guardando...",
+    "success": "Operación completada exitosamente",
+    "error": "Ocurrió un error",
+    "validationError": "Error de Validación",
+    "noData": "No hay datos disponibles",
+    "confirmDelete": "¿Está seguro de que desea eliminar este elemento?",
+    "unsavedChanges": "Tiene cambios sin guardar. ¿Está seguro de que desea salir?"
+  },
+  "labels": {
+    "yes": "Sí",
+    "no": "No",
+    "optional": "Opcional",
+    "required": "Requerido"
+  }
+}

@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { ProtectedRoute } from './ProtectedRoute';
 import { PublicRoute } from './PublicRoute';
 import { LoginPage } from '../../features/auth/components/LoginPage';
+import  Register  from '../../features/auth/components/Register';
 
 /**
  * Temporary Dashboard Page
@@ -150,6 +151,10 @@ export const router = createBrowserRouter([
         path: '/login',
         element: <LoginPage />,
       },
+      {
+      path: '/register',      // ← ADD THIS
+      element: <Register />,  // ← ADD THIS
+    },
     ],
   },
 

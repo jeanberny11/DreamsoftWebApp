@@ -1,0 +1,66 @@
+{
+  "errors": {
+    "required": "This field is required",
+    "email": {
+      "invalid": "Please enter a valid email address",
+      "required": "Email is required"
+    },
+    "password": {
+      "required": "Password is required",
+      "minLength": "Password must be at least {{min}} characters",
+      "maxLength": "Password must be at most {{max}} characters",
+      "uppercase": "Password must contain at least one uppercase letter",
+      "lowercase": "Password must contain at least one lowercase letter",
+      "number": "Password must contain at least one number",
+      "special": "Password must contain at least one special character",
+      "mismatch": "Passwords do not match"
+    },
+    "username": {
+      "required": "Username is required",
+      "minLength": "Username must be at least {{min}} characters",
+      "maxLength": "Username must be at most {{max}} characters",
+      "invalid": "Username can only contain letters, numbers, and underscores"
+    },
+    "name": {
+      "required": "Name is required",
+      "minLength": "Name must be at least {{min}} characters",
+      "maxLength": "Name must be at most {{max}} characters",
+      "invalid": "Name can only contain letters, spaces, and hyphens"
+    },
+    "phone": {
+      "required": "Phone number is required",
+      "invalid": "Please enter a valid phone number",
+      "invalidFormat": "Invalid phone number format. Must include country code (e.g., +1 809 123 4567)",
+      "placeholder": "Enter phone number"
+    },
+    "address": {
+      "required": "Address is required",
+      "street": "Street address is required",
+      "city": "City is required",
+      "state": "State/Province is required",
+      "postalCode": "Postal code is required",
+      "country": "Country is required"
+    },
+    "date": {
+      "required": "Date is required",
+      "invalid": "Please enter a valid date",
+      "future": "Date cannot be in the future",
+      "past": "Date cannot be in the past",
+      "minAge": "You must be at least {{age}} years old"
+    },
+    "terms": {
+      "required": "You must agree to the terms and conditions"
+    },
+    "verification": {
+      "required": "Please verify your email before proceeding",
+      "invalid": "Verification code must be 6 digits",
+      "expired": "Verification code has expired"
+    }
+  },
+  "passwordStrength": {
+    "weak": "Weak",
+    "fair": "Fair",
+    "good": "Good",
+    "strong": "Strong"
+  }
+}

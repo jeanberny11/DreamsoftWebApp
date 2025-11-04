@@ -1,25 +1,31 @@
 import { z } from 'zod';
+import type { TFunction } from 'i18next';
 
-// Email validation (reusable)
-const emailSchema = z.email({ message: 'Correo electronico invalido' })
-.min(1, 'El correo electronico es obligatorio')
-.toLowerCase()
-.trim();
+// Factory function to create email schema with translations
+export const createEmailSchema = (t: TFunction) =>
+  z
+    .string()
+    .min(1, t('validation:errors.email.required'))
+    .email({ message: t('validation:errors.email.invalid') })
+    .toLowerCase()
+    .trim();
 
-// Password validation (minimum 8 characters)
-export const passwordSchema = z
-  .string()
-  .min(1, 'La contrasena es obligatoria')
-  .min(8, 'La contrasena debe tener al menos 8 caracteres')
-  .max(100, 'La contrasena no debe exceder los 100 caracteres');
+// Factory function to create password schema with translations
+export const createPasswordSchema = (t: TFunction) =>
+  z
+    .string()
+    .min(1, t('validation:errors.password.required'))
+    .min(8, t('validation:errors.password.minLength', { min: 8 }))
+    .max(100, t('validation:errors.password.maxLength', { max: 100 }));
 
-// Login form schema
-export const loginSchema = z.object({
-  email: emailSchema,
-  userName: z.string().min(1, 'El nombre de usuario es obligatorio'),
-  password: z.string().min(1, 'La contrasena es obligatoria'),
-  rememberMe: z.boolean().optional(),
-});
+// Factory function to create login schema with translations
+export const createLoginSchema = (t: TFunction) =>
+  z.object({
+    email: createEmailSchema(t),
+    userName: z.string().min(1, t('validation:errors.username.required')),
+    password: z.string().min(1, t('validation:errors.password.required')),
+    rememberMe: z.boolean().optional(),
+  });
 
-// Export types inferred from schemas (for React Hook Form)
-export type LoginFormData = z.infer<typeof loginSchema>;
+// Export type (inferred from return type of factory function)
+export type LoginFormData = z.infer<ReturnType<typeof createLoginSchema>>;
