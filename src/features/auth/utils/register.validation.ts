@@ -9,6 +9,7 @@
 
 import { z } from "zod";
 import type { TFunction } from "i18next";
+import { createStrongPasswordSchema } from './validation.schemas';
 
 // ========================================
 // AGE CALCULATION HELPER
@@ -28,19 +29,6 @@ const calculateAge = (birthDate: Date): number => {
 
   return age;
 };
-
-// ========================================
-// PASSWORD VALIDATION FACTORY
-// ========================================
-
-const createPasswordSchema = (t: TFunction) =>
-  z
-    .string()
-    .min(8, t("validation:errors.password.minLength", { min: 8 }))
-    .regex(/[A-Z]/, t("validation:errors.password.uppercase"))
-    .regex(/[a-z]/, t("validation:errors.password.lowercase"))
-    .regex(/[0-9]/, t("validation:errors.password.number"))
-    .regex(/[^A-Za-z0-9]/, t("validation:errors.password.special"));
 
 // ========================================
 // EMAIL VERIFICATION STEP SCHEMA FACTORY
@@ -84,7 +72,7 @@ export const createAccountEssentialsStepSchema = (t: TFunction) =>
         .min(1, t("validation:errors.username.required"))
         .min(3, t("validation:errors.username.minLength", { min: 3 }))
         .max(30, t("validation:errors.username.maxLength", { max: 30 })),
-      password: createPasswordSchema(t),
+      password: createStrongPasswordSchema(t),
       confirmPassword: z
         .string()
         .min(1, t("validation:errors.password.required")),

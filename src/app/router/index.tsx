@@ -3,6 +3,9 @@ import { ProtectedRoute } from './ProtectedRoute';
 import { PublicRoute } from './PublicRoute';
 import { LoginPage } from '../../features/auth/components/LoginPage';
 import  Register  from '../../features/auth/components/Register';
+import { ForgotPasswordPage } from '../../features/auth/components/ForgotPasswordPage';
+import { ResetPasswordPage } from '../../features/auth/components/ResetPasswordPage';
+import { ROUTES } from './routes.constants';
 
 /**
  * Temporary Dashboard Page
@@ -139,8 +142,8 @@ const NotFoundPage = () => (
 export const router = createBrowserRouter([
   // Root redirect
   {
-    path: '/',
-    element: <Navigate to="/dashboard" replace />,
+    path: ROUTES.ROOT,
+    element: <Navigate to={ROUTES.DASHBOARD} replace />,
   },
 
   // Public routes (only accessible when NOT logged in)
@@ -148,13 +151,25 @@ export const router = createBrowserRouter([
     element: <PublicRoute />,
     children: [
       {
-        path: '/login',
+        path: ROUTES.LOGIN,
         element: <LoginPage />,
       },
       {
-      path: '/register',      // ← ADD THIS
-      element: <Register />,  // ← ADD THIS
-    },
+        path: ROUTES.REGISTER,
+        element: <Register />,
+      },
+      {
+        path: ROUTES.FORGOT_PASSWORD,
+        element: <ForgotPasswordPage />,
+      },
+      {
+        path: ROUTES.RESET_PASSWORD_WITH_TOKEN,
+        element: <ResetPasswordPage />,
+      },
+      {
+        path: ROUTES.RESET_PASSWORD,
+        element: <ResetPasswordPage />,
+      },
     ],
   },
 
@@ -163,23 +178,23 @@ export const router = createBrowserRouter([
     element: <ProtectedRoute />,
     children: [
       {
-        path: '/dashboard',
+        path: ROUTES.DASHBOARD,
         element: <TempDashboardPage />,
       },
       {
-        path: '/sales',
+        path: ROUTES.SALES,
         element: <TempSalesPage />,
       },
       {
-        path: '/inventory',
+        path: ROUTES.INVENTORY,
         element: <TempInventoryPage />,
       },
       {
-        path: '/customers',
+        path: ROUTES.CUSTOMERS,
         element: <TempCustomersPage />,
       },
       {
-        path: '/reports',
+        path: ROUTES.REPORTS,
         element: <TempReportsPage />,
       },
     ],

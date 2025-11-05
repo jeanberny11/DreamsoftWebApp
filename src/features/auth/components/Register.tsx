@@ -24,6 +24,7 @@ import {
   formatFieldErrorsMessage,
   type FieldValidationError,
 } from "../../../shared/utils/errorHandler";
+import { ROUTES } from "../../../app/router/routes.constants";
 import type {
   EmailVerificationStepData,
   AccountEssentialsStepData,
@@ -192,7 +193,7 @@ export default function Register() {
 
       // Redirect to login after 2 seconds
       setTimeout(() => {
-        navigate("/login");
+        navigate(ROUTES.LOGIN);
       }, 2000);
     } catch (error: any) {
       console.error("Account creation error:", error);
@@ -341,7 +342,7 @@ export default function Register() {
             <p className="text-sm text-gray-600">
               {t("auth:register.hasAccount")}{" "}
               <Link
-                to="/login"
+                to={ROUTES.LOGIN}
                 className="text-primary-600 hover:text-primary-700 font-medium transition-colors"
               >
                 {t("auth:register.signIn")}

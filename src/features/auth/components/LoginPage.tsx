@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, useNavigate } from 'react-router-dom';
@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { AuthLayout } from './AuthLayout';
 import { createLoginSchema, type LoginFormData } from '../utils/validation.schemas';
 import { useAuthStore } from '../stores/auth.store';
+import { ROUTES } from '../../../app/router/routes.constants';
 
 // ========================================
 // LOGIN PAGE COMPONENT
@@ -40,6 +41,31 @@ export const LoginPage: React.FC = () => {
       rememberMe: false,
     },
   });
+
+  // ========================================
+  // LOAD SAVED CREDENTIALS ON MOUNT
+  // ========================================
+  useEffect(() => {
+    try {
+      const rememberMe = localStorage.getItem('rememberMe') === 'true';
+      const savedCredentialsStr = localStorage.getItem('savedCredentials');
+
+      if (rememberMe && savedCredentialsStr) {
+        const savedCredentials = JSON.parse(savedCredentialsStr);
+
+        // Pre-fill the form with saved credentials
+        if (savedCredentials.email) {
+          setValue('email', savedCredentials.email);
+        }
+        if (savedCredentials.userName) {
+          setValue('userName', savedCredentials.userName);
+        }
+        setValue('rememberMe', true);
+      }
+    } catch (error) {
+      console.error('Error loading saved credentials:', error);
+    }
+  }, [setValue]);
 
   // Watch form values
   const rememberMe = watch('rememberMe');
@@ -247,7 +273,7 @@ export const LoginPage: React.FC = () => {
           <p className="text-sm text-gray-600">
             {t('auth:login.noAccount')}{' '}
             <Link
-              to="/register"
+              to={ROUTES.REGISTER}
               className="text-primary-600 hover:text-primary-700 font-medium"
             >
               {t('auth:login.signUp')}

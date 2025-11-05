@@ -15,7 +15,14 @@
 import apiClient, {
   ErrorResponseSchema,
 } from "../../../data/remote/api/client";
-import type { LoginRequest, LoginResponse, User } from "../types/auth.types";
+import type {
+  LoginRequest,
+  LoginResponse,
+  User,
+  ForgotPasswordRequest,
+  ResetPasswordRequest,
+  AuthOperationResponse
+} from "../types/auth.types";
 import { tokenManager } from "../utils/tokenManager";
 
 // ========================================
@@ -27,8 +34,8 @@ const AUTH_ENDPOINTS = {
   LOGIN: "/dreamsoftapi/Login/Login",
   REGISTER: "/auth/register",
   LOGOUT: "/dreamsoftapi/Login/Logout",
-  FORGOT_PASSWORD: "/auth/forgot-password",
-  RESET_PASSWORD: "/auth/reset-password",
+  FORGOT_PASSWORD: "/dreamsoftapi/Login/ForgotPassword",
+  RESET_PASSWORD: "/dreamsoftapi/Login/ResetPassword",
   REFRESH_TOKEN: "/dreamsoftapi/Login/RefreshToken",
 };
 
@@ -72,6 +79,21 @@ export const authService = {
         localStorage.setItem("user", JSON.stringify(response.data.user));
       }
 
+      // Handle Remember Me functionality
+      if (credentials.rememberMe) {
+        // Save email and username for next login (non-sensitive data)
+        const savedCredentials = {
+          email: credentials.email,
+          userName: credentials.userName,
+        };
+        localStorage.setItem("savedCredentials", JSON.stringify(savedCredentials));
+        localStorage.setItem("rememberMe", "true");
+      } else {
+        // Clear saved credentials if user unchecked remember me
+        localStorage.removeItem("savedCredentials");
+        localStorage.removeItem("rememberMe");
+      }
+
       return response.data;
     } catch (error: any) {
       if (ErrorResponseSchema.safeParse(error).success) {
@@ -106,7 +128,9 @@ export const authService = {
 
       // Clear user data from localStorage
       localStorage.removeItem("user");
-      localStorage.removeItem("rememberMe");
+
+      // Note: We don't clear "rememberMe" and "savedCredentials" here
+      // so the user's credentials remain saved for next login if they checked "Remember Me"
 
       console.log("✅ User logged out successfully");
     } catch (error: any) {
@@ -197,6 +221,85 @@ export const authService = {
    */
   getAccessToken(): string | null {
     return tokenManager.getAccessToken();
+  },
+
+  /**
+   * Request password reset link
+   *
+   * Sends a password reset email to the user if the email exists.
+   * Always returns success to prevent email enumeration attacks.
+   *
+   * SECURITY:
+   * - Returns success even if email doesn't exist (prevents email enumeration)
+   * - Backend handles rate limiting (max 3 requests per hour)
+   * - Reset token expires in 15 minutes
+   *
+   * @param request - Email address to send reset link to
+   * @returns Promise with success status and message
+   *
+   * @example
+   * const response = await authService.forgotPassword({
+   *   email: 'user@example.com'
+   * });
+   */
+  async forgotPassword(request: ForgotPasswordRequest): Promise<AuthOperationResponse> {
+    try {
+      const response = await apiClient.post<AuthOperationResponse>(
+        AUTH_ENDPOINTS.FORGOT_PASSWORD,
+        request
+      );
+
+      return response.data;
+    } catch (error: any) {
+      // Handle backend errors
+      if (ErrorResponseSchema.safeParse(error).success) {
+        const parsedError = ErrorResponseSchema.parse(error);
+        throw new Error(parsedError.ErrorMessage || 'Failed to send reset link');
+      }
+
+      // Generic error
+      throw new Error('Failed to send password reset link. Please try again.');
+    }
+  },
+
+  /**
+   * Reset password with token
+   *
+   * Validates the reset token and updates the user's password.
+   *
+   * SECURITY:
+   * - Token must be valid and not expired (15 min)
+   * - Token can only be used once
+   * - Password must meet strength requirements (validated by backend)
+   *
+   * @param request - Reset token and new password
+   * @returns Promise with success status and message
+   *
+   * @example
+   * const response = await authService.resetPassword({
+   *   token: 'abc123...',
+   *   newPassword: 'NewSecure123!',
+   *   confirmPassword: 'NewSecure123!'
+   * });
+   */
+  async resetPassword(request: ResetPasswordRequest): Promise<AuthOperationResponse> {
+    try {
+      const response = await apiClient.post<AuthOperationResponse>(
+        AUTH_ENDPOINTS.RESET_PASSWORD,
+        request
+      );
+
+      return response.data;
+    } catch (error: any) {
+      // Handle backend errors
+      if (ErrorResponseSchema.safeParse(error).success) {
+        const parsedError = ErrorResponseSchema.parse(error);
+        throw new Error(parsedError.ErrorMessage || 'Failed to reset password');
+      }
+
+      // Generic error
+      throw new Error('Failed to reset password. Please try again.');
+    }
   },
 };
 

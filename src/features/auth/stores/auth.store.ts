@@ -19,6 +19,7 @@ import type {
   User,
   LoginRequest,
 } from '../types/auth.types';
+import { isPublicRoute } from '../../../app/router/routes.constants';
 
 // ========================================
 // AUTH STORE STATE INTERFACE
@@ -130,6 +131,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
    * - Attempts to refresh access token using HttpOnly refresh token cookie
    * - If successful, restores user session
    * - If failed, user must login again
+   * - Skips auth check for public routes (login, register, reset password, etc.)
    *
    * @example
    * useEffect(() => {
@@ -138,6 +140,20 @@ export const useAuthStore = create<AuthStore>((set) => ({
    */
   initializeAuth: async () => {
     try {
+      // Check if current path is a public route
+      const currentPath = window.location.pathname;
+
+      // Skip auth initialization for public routes
+      if (isPublicRoute(currentPath)) {
+        set({
+          user: null,
+          isAuthenticated: false,
+          isLoading: false,
+        });
+        console.log('ℹ️ Public route detected - skipping auth initialization');
+        return;
+      }
+
       set({ isLoading: true });
 
       // Try to refresh access token using HttpOnly cookie

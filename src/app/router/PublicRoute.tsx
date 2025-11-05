@@ -12,6 +12,7 @@
 
 import { useIsAuthenticated } from '../../features/auth/stores/auth.store';
 import { Navigate, Outlet } from 'react-router-dom';
+import { ROUTES } from './routes.constants';
 
 /**
  * PublicRoute Component
@@ -22,7 +23,7 @@ export function PublicRoute() {
   if (isAuthenticated) {
     // User is logged in, redirect to dashboard
     console.log('✅ Already authenticated, redirecting to dashboard...');
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to={ROUTES.DASHBOARD} replace />;
   }
 
   // User is not authenticated, render the child routes (login, register)

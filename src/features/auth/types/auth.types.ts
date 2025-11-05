@@ -1,8 +1,4 @@
-import type { Country } from "@/data/types/generics/country.type";
-import type { Gender } from "@/data/types/generics/gender.type";
-import type { IdType } from "@/data/types/generics/idType.type";
-import type { Municipality } from "@/data/types/generics/municipality.type";
-import type { Province } from "@/data/types/generics/province.type";
+import type { Country, Gender, IdType, Municipality, Province } from "./account.types";
 
 export interface Account {
     accountId: number;
@@ -31,6 +27,7 @@ export interface LoginRequest {
     email: string;
     userName: string;
     password: string;
+    rememberMe?: boolean;
 }
 
 export interface LoginResponse {
@@ -56,4 +53,44 @@ export interface User {
     password: string;
     role: Role;
     active: boolean;
+}
+
+// ========================================
+// FORGOT PASSWORD TYPES
+// ========================================
+
+/**
+ * Generic API response for authentication operations
+ * Used for forgot password, reset password, and similar operations
+ *
+ * @property success - Whether the operation was successful
+ * @property message - User-friendly message about the result
+ */
+export interface AuthOperationResponse {
+  success: boolean;
+  message: string;
+}
+
+/**
+ * Request to initiate password reset process
+ *
+ * @property email - User's email address (account level)
+ * @property userName - User's username to identify specific user in the account
+ */
+export interface ForgotPasswordRequest {
+  email: string;
+  userName: string;
+}
+
+/**
+ * Request to reset password with token
+ *
+ * @property token - Password reset token from email link
+ * @property newPassword - New password to set
+ * @property confirmPassword - Confirmation of new password
+ */
+export interface ResetPasswordRequest {
+  token: string;
+  newPassword: string;
+  confirmPassword: string;
 }
