@@ -2,6 +2,7 @@ import axios, { AxiosError, type InternalAxiosRequestConfig } from "axios";
 import { z } from "zod";
 import { tokenManager } from "../../../features/auth/utils/tokenManager";
 import type { LoginResponse } from "../../../features/auth/types/auth.types";
+import { ROUTES } from "../../../app/router/routes.constants";
 
 export const ErrorResponseSchema = z.object({
   StatusCode: z.number(),
@@ -173,8 +174,8 @@ apiClient.interceptors.response.use(
         tokenManager.clearAccessToken();
         localStorage.removeItem("user");
 
-        if (!window.location.pathname.includes("/login")) {
-          window.location.href = "/login";
+        if (!window.location.pathname.includes(ROUTES.LOGIN)) {
+          window.location.href = ROUTES.LOGIN;
         }
         return Promise.reject(errorResponse);
       }
@@ -233,8 +234,8 @@ apiClient.interceptors.response.use(
         tokenManager.clearAccessToken();
         localStorage.removeItem("user");
 
-        if (!window.location.pathname.includes("/login")) {
-          window.location.href = "/login";
+        if (!window.location.pathname.includes(ROUTES.LOGIN)) {
+          window.location.href = ROUTES.LOGIN;
         }
 
         return Promise.reject(refreshError);
